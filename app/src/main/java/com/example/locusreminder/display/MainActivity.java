@@ -1,7 +1,9 @@
-package com.example.locusreminder;
+package com.example.locusreminder.display;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+
+import com.example.locusreminder.R;
 
 public class MainActivity extends AppCompatActivity {
 
