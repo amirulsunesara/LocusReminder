@@ -5,10 +5,13 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.EditText;
 import android.widget.ListView;
 
 import com.example.locusreminder.R;
@@ -16,6 +19,7 @@ import com.example.locusreminder.adapter.ReminderAdapter;
 import com.example.locusreminder.db.DBManager;
 import com.example.locusreminder.db.ReminderData;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -23,6 +27,8 @@ public class HomeFragment extends Fragment {
 
     DBManager dbManager;
     private ListView reminderList;
+    ReminderAdapter reminderAdapter;
+    private EditText search;
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -32,12 +38,16 @@ public class HomeFragment extends Fragment {
         floatingActionButton.show();
         reminderList =(ListView)view.findViewById(R.id.listview_reminders);
 
-        dbManager =new DBManager(getContext());
+        search = (EditText) view.findViewById(R.id.edSearchReminders);
 
+
+        dbManager =new DBManager(getContext());
+        final List<ReminderData> lstReminder1 = new ArrayList<>();
 
         final List<ReminderData> lstReminder = dbManager.getReminderData();
 
-        reminderList.setAdapter(new ReminderAdapter(getActivity(),lstReminder));
+        reminderAdapter =new ReminderAdapter(getActivity(),lstReminder);
+        reminderList.setAdapter(reminderAdapter);
 
         reminderList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -56,6 +66,39 @@ public class HomeFragment extends Fragment {
 
             }
         });
+
+        search.addTextChangedListener(new TextWatcher() {
+
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                // ma.getFilter().filter(s);
+                if(lstReminder1.size()>0)
+                {
+                    lstReminder1.clear();
+                }
+                for (ReminderData reminderData:lstReminder)
+                {
+                    if (reminderData.getTitle().toLowerCase().contains(s.toString())) {
+
+
+                        lstReminder1.add(reminderData);
+                    }
+                }
+
+                reminderAdapter.setData(lstReminder1);
+
+            }
+
+            public void beforeTextChanged(CharSequence s, int start, int count,
+                                          int after) {
+
+
+            }
+
+            public void afterTextChanged(Editable s) {
+            }
+        });
+
+
 
         return view;
 

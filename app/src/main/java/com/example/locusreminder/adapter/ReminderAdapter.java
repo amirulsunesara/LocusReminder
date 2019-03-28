@@ -24,6 +24,11 @@ public class ReminderAdapter extends BaseAdapter {
         this.activity = activity;
     }
 
+    public void setData(List<ReminderData> reminderModelList1){
+        this.lstReminder = reminderModelList1;
+        notifyDataSetChanged();
+    }
+
     @Override
     public int getCount() {
         return lstReminder.size();
