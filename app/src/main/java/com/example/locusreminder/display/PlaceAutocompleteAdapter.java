@@ -39,14 +39,8 @@ public class PlaceAutocompleteAdapter
 
     private GeoDataClient mGeoDataClient;
 
-    /**
-     * The bounds used for Places Geo Data autocomplete API requests.
-     */
     private LatLngBounds mBounds;
 
-    /**
-     * The autocomplete filter used to restrict queries to a specific set of place types.
-     */
     private AutocompleteFilter mPlaceFilter;
 
     /**
@@ -62,16 +56,10 @@ public class PlaceAutocompleteAdapter
         mPlaceFilter = filter;
     }
 
-    /**
-     * Sets the bounds for all subsequent queries.
-     */
     public void setBounds(LatLngBounds bounds) {
         mBounds = bounds;
     }
 
-    /**
-     * Returns the number of results received in the last autocomplete query.
-     */
     @Override
     public int getCount() {
         return mResultList.size();
@@ -95,23 +83,14 @@ public class PlaceAutocompleteAdapter
         return row;
     }
 
-    /**
-     * Returns the filter for the current set of autocomplete results.
-     */
     @Override
     public Filter getFilter() {
         return new Filter() {
             @Override
             protected FilterResults performFiltering(CharSequence constraint) {
                 FilterResults results = new FilterResults();
-
-                // We need a separate list to store the results, since
-                // this is run asynchronously.
                 ArrayList<AutocompletePrediction> filterData = new ArrayList<>();
-
-                // Skip the autocomplete query if no constraints are given.
                 if (constraint != null) {
-                    // Query the autocomplete API for the (constraint) search string.
                     filterData = getAutocomplete(constraint);
                 }
 
@@ -123,6 +102,15 @@ public class PlaceAutocompleteAdapter
                 }
 
                 return results;
+            }
+
+            @Override
+            public CharSequence convertResultToString(Object resultValue) {
+                if (resultValue instanceof AutocompletePrediction) {
+                    return ((AutocompletePrediction) resultValue).getFullText(null);
+                } else {
+                    return super.convertResultToString(resultValue);
+                }
             }
 
             @Override
@@ -138,16 +126,6 @@ public class PlaceAutocompleteAdapter
                 }
             }
 
-            @Override
-            public CharSequence convertResultToString(Object resultValue) {
-                // Override this method to display a readable result in the AutocompleteTextView
-                // when clicked.
-                if (resultValue instanceof AutocompletePrediction) {
-                    return ((AutocompletePrediction) resultValue).getFullText(null);
-                } else {
-                    return super.convertResultToString(resultValue);
-                }
-            }
         };
     }
 
