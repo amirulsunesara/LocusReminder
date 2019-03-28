@@ -88,19 +88,20 @@ public class ViewReminders extends AppCompatActivity
         }
     }
 
-
+  //navigation on settings and help and documentation
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.btnHelp) {
+         if (id == R.id.btnSettings) {
+            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                    new SettingsFragment()).commit();
+        }
+        else if (id == R.id.btnHelp) {
             getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
                     new HelpFragment()).commit();
 
-        } else if (id == R.id.btnSettings) {
-            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                    new SettingsFragment()).commit();
         }
         else if(id== R.id.btnHome){
             getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
