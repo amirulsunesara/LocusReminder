@@ -79,16 +79,18 @@ public class MainActivity extends AppCompatActivity {
         textView1.setText(note_text);
         location_text.setText(selected_place);
         dbManager = new DBManager(this);
+        //Toast notification for field validation
         save_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this,ViewReminders.class);
-                if( text.getText().toString().equals("")){
-                     Toast.makeText(getApplicationContext(),"Note Title field cannot be empty",Toast.LENGTH_LONG).show();
-                }
-                else if(textView1.getText().toString().equals("")){
+                if(textView1.getText().toString().equals("")){
                     Toast.makeText(getApplicationContext(),"Note text field cannot be empty",Toast.LENGTH_LONG).show();
                 }
+                else if( text.getText().toString().equals("")){
+                     Toast.makeText(getApplicationContext(),"Note Title field cannot be empty",Toast.LENGTH_LONG).show();
+                }
+
                 else if(location_text.getText().toString().equals("")){
                     Toast.makeText(getApplicationContext(),"Add location to get reminders",Toast.LENGTH_LONG).show();
                 }
