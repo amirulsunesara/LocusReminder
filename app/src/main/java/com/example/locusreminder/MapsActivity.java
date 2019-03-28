@@ -1,6 +1,7 @@
 package com.example.locusreminder;
 
 import android.Manifest;
+import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Address;
@@ -14,8 +15,8 @@ import android.support.v4.content.ContextCompat;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
-import android.view.WindowManager;
 import android.view.inputmethod.EditorInfo;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.TextView;
@@ -98,6 +99,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                         || event.getAction() == event.ACTION_DOWN
                         || event.getAction() == event.KEYCODE_ENTER) {
                         geoLocate();
+                    hideSoftkeyboard(MapsActivity.this);
                 }
                 return false;
             }
@@ -119,6 +121,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             google_search_bar=(AutoCompleteTextView) findViewById(R.id.google_search_bar);
             selected_place_name=google_search_bar.getText().toString();
             moveCamera(new LatLng(address.getLatitude(),address.getLongitude()),DEFAULT_ZOOM);
+
         }
     }
     private void getDeviceLocation() {
@@ -147,7 +150,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, zoom));
         MarkerOptions options = new MarkerOptions().position(latLng).title("My Location");
         mMap.addMarker(options);
-        hideSoftkeyboard();
+
     }
 
     private void intiMap() {
@@ -209,9 +212,16 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
         mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));*/
     }
-    private void hideSoftkeyboard(){
-        this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
+    public static void hideSoftkeyboard(Activity activity) {
+        InputMethodManager inputMethodManager =
+                (InputMethodManager) activity.getSystemService(
+                        Activity.INPUT_METHOD_SERVICE);
+        inputMethodManager.hideSoftInputFromWindow(
+                activity.getCurrentFocus().getWindowToken(), 0);
     }
+    /*private void hideSoftkeyboard(){
+        this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
+    }*/
 
 
 }

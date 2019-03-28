@@ -43,10 +43,14 @@
    </RelativeLayout>
     <Button
         android:layout_height="wrap_content"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
         android:text="Done"
         android:id="@+id/maps_done_button"
         android:layout_marginTop="150dp"
+        android:textColor="@color/white"
+        android:backgroundTint="@color/black_color"
         >
 
     </Button>
