@@ -27,24 +27,16 @@ import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
 
-/**
- * Adapter that handles Autocomplete requests from the Places Geo Data Client.
- * {@link AutocompletePrediction} results from the API are frozen and stored directly in this
- * adapter. (See {@link AutocompletePrediction#freeze()}.)
- */
+
 public class PlaceAutocompleteAdapter
         extends ArrayAdapter<AutocompletePrediction> implements Filterable {
 
     private static final String TAG = "PlaceAutocompleteAdapter";
     private static final CharacterStyle STYLE_BOLD = new StyleSpan(Typeface.BOLD);
-    /**
-     * Current results returned by this adapter.
-     */
+
     private ArrayList<AutocompletePrediction> mResultList;
 
-    /**
-     * Handles autocomplete requests.
-     */
+
     private GeoDataClient mGeoDataClient;
 
     /**
@@ -85,9 +77,7 @@ public class PlaceAutocompleteAdapter
         return mResultList.size();
     }
 
-    /**
-     * Returns an item from the last autocomplete query.
-     */
+
     @Override
     public AutocompletePrediction getItem(int position) {
         return mResultList.get(position);
@@ -96,13 +86,7 @@ public class PlaceAutocompleteAdapter
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         View row = super.getView(position, convertView, parent);
-
-        // Sets the primary and secondary text for a row.
-        // Note that getPrimaryText() and getSecondaryText() return a CharSequence that may contain
-        // styling based on the given CharacterStyle.
-
         AutocompletePrediction item = getItem(position);
-
         TextView textView1 = (TextView) row.findViewById(android.R.id.text1);
         TextView textView2 = (TextView) row.findViewById(android.R.id.text2);
         textView1.setText(item.getPrimaryText(STYLE_BOLD));
@@ -200,9 +184,6 @@ public class PlaceAutocompleteAdapter
 
         try {
             AutocompletePredictionBufferResponse autocompletePredictions = results.getResult();
-            //ArrayList<AutocompletePrediction> a = new ArrayList<AutocompletePrediction>();
-           // Freeze the results immutable representation that can be stored safely.
-            //return  a;
             return DataBufferUtils.freezeAndClose(autocompletePredictions);
         } catch (RuntimeExecutionException e) {
             // If the query did not complete successfully return null
