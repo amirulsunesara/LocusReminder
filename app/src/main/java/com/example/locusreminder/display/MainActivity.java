@@ -32,38 +32,32 @@ public class MainActivity extends AppCompatActivity {
     ReminderData reminderData;
     AutoCompleteTextView text;
     ImageView image;
+    //List used for title
+    String[] list1={"Library","Restaurant","Movie","Train","Bus",
+            "Flight","Grocery","Books","Shopping","Hospital","Office",
+            "Work","Temple","Church","Zoo","Home","Museum","Apartment"};
 
     @Override
     public void onBackPressed() {
         startActivity(new Intent(this, ViewReminders.class));
     }
 
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_note);
         text = (AutoCompleteTextView)findViewById(R.id.textView);
-        String[] list1={"Library","Restaurant","Movie","Train","Bus",
-                "Flight","Grocery","Books","Shopping","Hospital","Office",
-                "Work","Temple","Church","Zoo","Home","Museum","Apartment"};
+
         image=findViewById(R.id.image);
         ArrayAdapter adapter = new ArrayAdapter(this,android.R.layout.simple_list_item_1,list1);
-
         text.setAdapter(adapter);
         text.setThreshold(1);
-
         text.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
                 String list = (String) parent.getItemAtPosition(position);
                 setImage(list);
-
-
-
             }
 
 
@@ -125,24 +119,26 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
+    //code to hide key board
     private void hideSoftkeyboard(){
         this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
     }
+    //Code to set image for title
     public void setImage(String list){
-        if(list.equals("Library")){
-            image.setImageResource(R.drawable.ic_library_books_black_24dp);
-        }
         if(list.equals("Restaurant")){
             image.setImageResource(R.drawable.ic_local_cafe_black_24dp);
         }
-        if(list.equals("Movie")){
-            image.setImageResource(R.drawable.ic_movie_black_24dp);
+        if(list.equals("Library")){
+            image.setImageResource(R.drawable.ic_library_books_black_24dp);
         }
         if(list.equals("Train")){
             image.setImageResource(R.drawable.ic_train_black_24dp);
         }
         if(list.equals("Bus")){
             image.setImageResource(R.drawable.ic_directions_bus_black_24dp);
+        }
+        if(list.equals("Movie")){
+            image.setImageResource(R.drawable.ic_movie_black_24dp);
         }
         if(list.equals("Flight")){
             image.setImageResource(R.drawable.ic_flight_black_24dp);
