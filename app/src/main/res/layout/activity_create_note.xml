@@ -3,7 +3,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/red"
+    >
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -33,13 +35,15 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
-            android:hint ="enter title"
+            android:hint ="Enter title"
             android:padding="10dp"
             android:layout_marginLeft="5dp"
             android:layout_marginRight="5dp"
-            android:textColor="@color/white"
             android:background="@drawable/edittext_border"
-            android:singleLine="true" />
+            android:singleLine="true"
+            android:textColorHint="@color/white"
+            android:textColor="@color/white"
+            />
 
 
     </LinearLayout>
@@ -49,11 +53,14 @@
         android:layout_width="match_parent"
         android:layout_marginTop="20px"
         android:layout_height="1200px"
-        android:hint ="enter note"
+        android:hint ="Enter note"
         android:layout_marginLeft="5dp"
         android:layout_marginRight="5dp"
-        android:textColor="@color/white"
         android:background="@drawable/edittext_border"
+        android:textColorHint="@color/white"
+        android:textColor="@color/white"
+        android:gravity="top"
+        android:lines="10"
         />
 
     <LinearLayout
