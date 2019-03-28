@@ -89,9 +89,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     }
 
     private void init(){
-        //mPlaceAutocompleteAdapter = new PlaceAutocompleteAdapter(this,
-         //       Places.getGeoDataClient(this,null),LAT_LNG_BOUNDS,null);
-       // mSearchText.setAdapter(mPlaceAutocompleteAdapter);
+
         mSearchText.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
@@ -104,25 +102,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 return false;
             }
         });
-    }
-    private void geoLocate(){
-        String searchString = mSearchText.getText().toString();
-        Geocoder geocoder = new Geocoder(MapsActivity.this);
-        List<Address> list = new ArrayList<>();
-        try{
-        list =geocoder.getFromLocationName(searchString,1);
-        }catch (IOException e){
-        }
-        if(list.size() >0){
-            Address address = list.get(0);
-            Log.d("maps","geo location found:"+ address.toString());
-            latitued_seleted= Double.toString(address.getLatitude()) ;
-            longituted_selected=Double.toString(address.getLongitude());
-            google_search_bar=(AutoCompleteTextView) findViewById(R.id.google_search_bar);
-            selected_place_name=google_search_bar.getText().toString();
-            moveCamera(new LatLng(address.getLatitude(),address.getLongitude()),DEFAULT_ZOOM);
-
-        }
     }
     private void getDeviceLocation() {
         mFusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
@@ -145,6 +124,25 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
         }
     }
+    private void geoLocate(){
+        String searchString = mSearchText.getText().toString();
+        Geocoder geocoder = new Geocoder(MapsActivity.this);
+        List<Address> list = new ArrayList<>();
+        try{
+        list =geocoder.getFromLocationName(searchString,1);
+        }catch (IOException e){
+        }
+        if(list.size() >0){
+            Address address = list.get(0);
+            latitued_seleted= Double.toString(address.getLatitude()) ;
+            longituted_selected=Double.toString(address.getLongitude());
+            google_search_bar=(AutoCompleteTextView) findViewById(R.id.google_search_bar);
+            selected_place_name=google_search_bar.getText().toString();
+            moveCamera(new LatLng(address.getLatitude(),address.getLongitude()),DEFAULT_ZOOM);
+
+        }
+    }
+
 
     private void moveCamera(LatLng latLng, float zoom) {
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, zoom));
@@ -187,15 +185,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         }
     }
 
-    /**
-     * Manipulates the map once available.
-     * This callback is triggered when the map is ready to be used.
-     * This is where we can add markers or lines, add listeners or move the camera. In this case,
-     * we just add a marker near Sydney, Australia.
-     * If Google Play services is not installed on the device, the user will be prompted to install
-     * it inside the SupportMapFragment. This method will only be triggered once the user has
-     * installed Google Play services and returned to the app.
-     */
+
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
@@ -207,10 +197,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         }
         mMap.setMyLocationEnabled(true);
         init();
-        // Add a marker in Sydney and move the camera
-       /* LatLng sydney = new LatLng(44.6488, -63.5752);
-        mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));*/
+
     }
     public static void hideSoftkeyboard(Activity activity) {
         InputMethodManager inputMethodManager =
@@ -219,9 +206,5 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         inputMethodManager.hideSoftInputFromWindow(
                 activity.getCurrentFocus().getWindowToken(), 0);
     }
-    /*private void hideSoftkeyboard(){
-        this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
-    }*/
-
 
 }
