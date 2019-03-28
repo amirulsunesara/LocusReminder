@@ -27,7 +27,7 @@ public class MainActivity extends AppCompatActivity {
     EditText textView1;
     TextView location_text;
     Button save_button,cancel_button;
-    public  String latitue,longitude,selected_place,title,note_text;
+    public  String latitue,longitude,selected_place,title,note_text,id,mode;
     DBManager dbManager;
     ReminderData reminderData;
     AutoCompleteTextView text;
@@ -74,6 +74,15 @@ public class MainActivity extends AppCompatActivity {
         selected_place = intent_get_data.getStringExtra("selected_pace");
         title = intent_get_data.getStringExtra("title");
         note_text = intent_get_data.getStringExtra("NoteText");
+        id = intent_get_data.getStringExtra("id");
+        mode = intent_get_data.getStringExtra("mode");
+        if(mode != null) {
+            save_button.setText("Update");
+            text.setText(title);
+            textView1.setText(note_text);
+            location_text.setText(selected_place);
+        }
+
         text.setText(title);
         setImage(title);
         textView1.setText(note_text);
@@ -95,10 +104,16 @@ public class MainActivity extends AppCompatActivity {
                     Toast.makeText(getApplicationContext(),"Add location to get reminders",Toast.LENGTH_LONG).show();
                 }
                 else {
-
-                    String strUnqId =randomNumber();
-                    dbManager.insertReminderData(strUnqId,text.getText().toString(),textView1.getText().toString(),location_text.getText().toString(),longitude,latitue,"0");
-                    startActivity(intent);
+                    if(mode != null)
+                    {
+                        dbManager.updateReminderData(id,text.getText().toString(), textView1.getText().toString(), location_text.getText().toString(), longitude, latitue, "0");
+                        startActivity(intent);
+                    }
+                    else {
+                        String strUnqId = randomNumber();
+                        dbManager.insertReminderData(strUnqId, text.getText().toString(), textView1.getText().toString(), location_text.getText().toString(), longitude, latitue, "0");
+                        startActivity(intent);
+                    }
                 }
             }
         });

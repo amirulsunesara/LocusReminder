@@ -62,6 +62,7 @@ public class ReminderAdapter extends BaseAdapter {
         return view;
     }
 
+
     private void setReminderData(ViewHolder viewholder, ReminderData reminderModel) {
         viewholder.note_text.setText(reminderModel.getNote());
         viewholder.note_title.setText(reminderModel.getTitle());

@@ -8,6 +8,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.example.locusreminder.R;
@@ -21,6 +22,7 @@ import java.util.List;
 public class HomeFragment extends Fragment {
 
     DBManager dbManager;
+    private ListView reminderList;
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -28,14 +30,32 @@ public class HomeFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_home, container, false);
         FloatingActionButton floatingActionButton = ((ViewReminders) getActivity()).getFloatingActionButton();
         floatingActionButton.show();
-        ListView reminderList =(ListView)view.findViewById(R.id.listview_reminders);
+        reminderList =(ListView)view.findViewById(R.id.listview_reminders);
 
         dbManager =new DBManager(getContext());
 
 
-        List<ReminderData> lstReminder = dbManager.getReminderData();
+        final List<ReminderData> lstReminder = dbManager.getReminderData();
 
         reminderList.setAdapter(new ReminderAdapter(getActivity(),lstReminder));
+
+        reminderList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                ReminderData reminderData =(ReminderData) lstReminder.get(i);
+                Intent intent = new Intent( getActivity(), MainActivity.class);
+                intent.putExtra("Latitude",reminderData.getLatitude());
+                intent.putExtra("Longitude",reminderData.getLongitude());
+                intent.putExtra("selected_pace",reminderData.getLocation());
+                intent.putExtra("title",reminderData.getTitle());
+                intent.putExtra("NoteText",reminderData.getNote());
+                intent.putExtra("mode","update");
+                intent.putExtra("id",reminderData.getId());
+
+                startActivity(intent);
+
+            }
+        });
 
         return view;
 

@@ -1,5 +1,6 @@
 package com.example.locusreminder.db;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -48,6 +49,12 @@ public class DBManager extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
         SQLiteStatement insertStmt = db.compileStatement(sql);
 
+            if(longitude.equals(""))
+            {
+                longitude = "0";
+                latitude = "0";
+            }
+
             insertStmt.bindString(1, id);
             insertStmt.bindString(2, title);
             insertStmt.bindString(3, note);
@@ -62,14 +69,21 @@ public class DBManager extends SQLiteOpenHelper {
         return true;
     }
 
-    public void updateReminderData(String id, String title, String note, String location, String longitude,String latitude,String isDeleted) {
+    public boolean updateReminderData(String id, String title, String note, String location, String longitude,String latitude,String isDeleted) {
 
-        String sql = String.format("UPDATE %s SET title=%s,note=%s,location=%s,longitude=%f,latitude=%f,isDeleted=%f WHERE id=%s",DATABASE_NAME,title,note,location,longitude,latitude,isDeleted);
+
+        ContentValues cv = new ContentValues();
+        cv.put("title",title);
+        cv.put("note",note);
+        cv.put("location",location);
+        cv.put("longitude",longitude);
+        cv.put("latitude",latitude);
+        cv.put("isDeleted","0");
 
         SQLiteDatabase db = this.getWritableDatabase();
-        SQLiteStatement updateStmt = db.compileStatement(sql);
-        updateStmt.executeInsert();
-        db.close();
+
+        return db.update(DATABASE_NAME, cv,  "id=\"" + id + "\"", null)>0;
+
 
     }
 
@@ -101,7 +115,7 @@ public class DBManager extends SQLiteOpenHelper {
     {
         SQLiteDatabase db = this.getWritableDatabase();
         db.execSQL("delete from "+DATABASE_NAME);
-       // return db.delete(facebook_info, "id" + "=" + title, null) > 0;
+
     }
 
 
