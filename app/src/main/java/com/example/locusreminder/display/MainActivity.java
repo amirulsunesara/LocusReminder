@@ -94,8 +94,7 @@ public class MainActivity extends AppCompatActivity {
                 }
                 else {
 
-                    UUID unqId = UUID.randomUUID();
-                    String strUnqId = unqId.toString();
+                    String strUnqId =randomNumber();
                     dbManager.insertReminderData(strUnqId,text.getText().toString(),textView1.getText().toString(),location_text.getText().toString(),longitude,latitue,"0");
                     startActivity(intent);
                 }
@@ -118,6 +117,12 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+    }
+    //Generate id for each notification
+    private String randomNumber(){
+        UUID unqId = UUID.randomUUID();
+        String strUnqId = unqId.toString();
+        return strUnqId;
     }
     //code to hide key board
     private void hideSoftkeyboard(){
