@@ -5,18 +5,38 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="@color/red"
     tools:context=".display.MainActivity">
-    <EditText
-        android:id="@+id/textView"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20px"
-        android:hint ="enter title"
-        android:layout_marginLeft="5dp"
-        android:layout_marginRight="5dp"
-        android:background="@drawable/edittext_border"
-        android:singleLine="true"
-        />
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/image"
+            android:layout_margin="5dp"
+            android:padding="5dp"
+            android:src="@drawable/ic_new_releases_black_24dp"
+            android:background="@drawable/edittext_border"
+            android:scaleType="centerCrop"
+            android:layout_gravity="center"
+            android:layout_width="75dp"
+            android:layout_height="75dp" />
+
+        <AutoCompleteTextView
+            android:id="@+id/textView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:hint ="enter title"
+            android:padding="10dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:textColor="@color/white"
+            android:background="@drawable/edittext_border"
+            android:singleLine="true" />
+
+
+    </LinearLayout>
 
     <EditText
         android:id="@+id/textView1"
@@ -26,6 +46,7 @@
         android:hint ="enter note"
         android:layout_marginLeft="5dp"
         android:layout_marginRight="5dp"
+        android:textColor="@color/white"
         android:background="@drawable/edittext_border"
         />
 
@@ -37,10 +58,13 @@
             android:id="@+id/AddLocationButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textColor="@color/white"
+            android:backgroundTint="@color/black_color"
             android:text="Add Location" />
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textColor="@color/white"
             android:id="@+id/location_text"/>
     </LinearLayout>
 
@@ -56,12 +80,16 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight=".50"
+            android:textColor="@color/white"
+            android:backgroundTint="@color/black_color"
             android:text="Save" />
         <Button
             android:id="@+id/cancel_button"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight=".50"
+            android:textColor="@color/white"
+            android:backgroundTint="@color/black_color"
             android:text="Cancel"
             />
     </LinearLayout>
