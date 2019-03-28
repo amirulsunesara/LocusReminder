@@ -9,16 +9,16 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import com.example.locusreminder.R;
-import com.example.locusreminder.model.ReminderModel;
+import com.example.locusreminder.db.ReminderData;
 
 import java.util.List;
 
 public class ReminderAdapter extends BaseAdapter {
 
-    private List<ReminderModel> lstReminder;
+    private List<ReminderData> lstReminder;
     private Activity activity;
 
-    public ReminderAdapter(Activity activity, List<ReminderModel> reminderModelList){
+    public ReminderAdapter(Activity activity, List<ReminderData> reminderModelList){
 
         this.lstReminder = reminderModelList;
         this.activity = activity;
@@ -62,9 +62,9 @@ public class ReminderAdapter extends BaseAdapter {
         return view;
     }
 
-    private void setReminderData(ViewHolder viewholder, ReminderModel reminderModel) {
-        viewholder.note_text.setText(reminderModel.getNote_text());
-        viewholder.note_title.setText(reminderModel.getNote_title());
+    private void setReminderData(ViewHolder viewholder, ReminderData reminderModel) {
+        viewholder.note_text.setText(reminderModel.getNote());
+        viewholder.note_title.setText(reminderModel.getTitle());
     }
 
     private static class ViewHolder {

@@ -3,6 +3,7 @@ package com.example.locusreminder.display;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
@@ -12,6 +13,10 @@ import android.widget.Toast;
 
 import com.example.locusreminder.MapsActivity;
 import com.example.locusreminder.R;
+import com.example.locusreminder.db.DBManager;
+import com.example.locusreminder.db.ReminderData;
+
+import java.util.UUID;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -19,6 +24,16 @@ public class MainActivity extends AppCompatActivity {
     TextView location_text;
     Button save_button,cancel_button;
     public  String latitue,longitude,selected_place,title,note_text;
+    DBManager dbManager;
+    ReminderData reminderData;
+
+    @Override
+    public void onBackPressed() {
+        startActivity(new Intent(this, ViewReminders.class));
+    }
+
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,6 +67,12 @@ public class MainActivity extends AppCompatActivity {
                     Toast.makeText(getApplicationContext(),"Add location to get reminders",Toast.LENGTH_LONG).show();
                 }
                 else {
+
+                    UUID unqId = UUID.randomUUID();
+                    String strUnqId = unqId.toString();
+
+                    dbManager.insertReminderData(strUnqId,textView.getText().toString(),textView1.getText().toString(),location_text.getText().toString(),longitude,latitue,"0");
+
                     startActivity(intent);
                 }
             }

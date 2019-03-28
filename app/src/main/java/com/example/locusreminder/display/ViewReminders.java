@@ -1,10 +1,15 @@
 package com.example.locusreminder.display;
 
 import android.app.Activity;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
+import android.support.v4.app.NotificationCompat;
+import android.support.v4.app.NotificationManagerCompat;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -13,9 +18,11 @@ import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.example.locusreminder.R;
 import com.example.locusreminder.adapter.ReminderAdapter;
+import com.example.locusreminder.db.ReminderData;
 import com.example.locusreminder.model.ReminderModel;
 
 import java.util.ArrayList;
@@ -25,6 +32,11 @@ public class ViewReminders extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     private Activity activity;
+    FloatingActionButton fab;
+
+    public FloatingActionButton getFloatingActionButton() {
+        return fab;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,7 +46,7 @@ public class ViewReminders extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -57,16 +69,12 @@ public class ViewReminders extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        ListView reminderList = findViewById(R.id.listview_reminders);
-        ReminderModel reminderModel = new ReminderModel("Purchase Book","Borrow alchemist book from library");
-        ReminderModel reminderModel2 = new ReminderModel("Study","Study Data warehousing in library");
+        View headerView = navigationView.getHeaderView(0);
+        TextView tvPhoneName = headerView.findViewById(R.id.tvPhoneName);
+        tvPhoneName.setText(Build.MODEL);
 
-        List<ReminderModel> lstReminder = new ArrayList<ReminderModel>();
-        lstReminder.add(reminderModel);
-        lstReminder.add(reminderModel2);
-
-        reminderList.setAdapter(new ReminderAdapter(activity,lstReminder));
-
+        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                new HomeFragment()).commit();
 
     }
 
@@ -87,18 +95,49 @@ public class ViewReminders extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.btnHelp) {
-            //for help screen
+            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                    new HelpFragment()).commit();
 
         } else if (id == R.id.btnSettings) {
-            //for settings screen
+            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                    new SettingsFragment()).commit();
         }
         else if(id== R.id.btnHome){
-            //for home screen
+            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                    new HomeFragment()).commit();
 
         }
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        DrawerLayout drawer = findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
+
+    public void createNotification()
+    {
+        NotificationCompat.Builder builder = new NotificationCompat.Builder(this, "Channel")
+                .setSmallIcon(R.drawable.ic_home_black_24dp)
+                .setContentTitle("My notification")
+                .setContentText("Much longer text that cannot fit one line...")
+                .setStyle(new NotificationCompat.BigTextStyle()
+                        .bigText("Much longer text that cannot fit one line..."))
+                .setPriority(NotificationCompat.PRIORITY_DEFAULT);
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            String channelId = "Channel";
+            NotificationChannel channel = new NotificationChannel(channelId,
+                    "description",
+                    NotificationManager.IMPORTANCE_DEFAULT);
+            NotificationManager notificationManager = getSystemService(NotificationManager.class);
+            notificationManager.createNotificationChannel(channel);
+
+        }
+
+        NotificationManagerCompat notificationManager = NotificationManagerCompat.from(this);
+        notificationManager.notify(0, builder.build());
+
+    }
 }
+
+
+
