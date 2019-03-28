@@ -78,11 +78,12 @@ public class MainActivity extends AppCompatActivity {
         mode = intent_get_data.getStringExtra("mode");
         if(mode != null) {
             save_button.setText("Update");
+
             text.setText(title);
             textView1.setText(note_text);
             location_text.setText(selected_place);
+            btn.setText("Update Location");
         }
-
         text.setText(title);
         setImage(title);
         textView1.setText(note_text);
