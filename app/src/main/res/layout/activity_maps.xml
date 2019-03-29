@@ -34,9 +34,11 @@
        <AutoCompleteTextView
            android:layout_height="match_parent"
            android:layout_width="match_parent"
+           android:inputType="text"
            android:layout_toRightOf="@+id/ic_search_icon"
 	   android:textSize="15sp"
-           android:textColor="#000"
+           android:textColor="@color/black_color"
+           android:maxLines="1"
 	   android:background="@null"
            android:id="@+id/google_search_bar"
            android:hint="Enter the place"/>
@@ -49,8 +51,8 @@
         android:text="Done"
         android:id="@+id/maps_done_button"
         android:layout_marginTop="150dp"
-        android:textColor="@color/white"
-        android:backgroundTint="@color/black_color"
+        android:textColor="@color/black_color"
+
         >
 
     </Button>

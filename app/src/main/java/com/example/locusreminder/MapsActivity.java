@@ -57,16 +57,21 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private String latitued_seleted="";
     private String longituted_selected="";
     private  String selected_place_name="";
-    private String title,note_text;
+    private String title,note_text,search_text="",mode,id;
     private AutoCompleteTextView google_search_bar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps);
-        Intent intent= getIntent();
-        title= intent.getStringExtra("Title");
-        note_text= intent.getStringExtra("NoteText");
+        Intent intent1= getIntent();
+        title= intent1.getStringExtra("Title");
+        note_text= intent1.getStringExtra("NoteText");
+        search_text = intent1.getStringExtra("selected_pace");
+        latitued_seleted=intent1.getStringExtra("Latitude");
+        longituted_selected=intent1.getStringExtra("Longitude");
+        id=intent1.getStringExtra("id");
+        mode =intent1.getStringExtra("mode");
         mSearchText = (AutoCompleteTextView)findViewById(R.id.google_search_bar);
         maps_done_button =(Button)findViewById(R.id.maps_done_button);
         maps_done_button.setOnClickListener(new View.OnClickListener(){
@@ -75,9 +80,11 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 Intent intent = new Intent( MapsActivity.this, MainActivity.class);
                 intent.putExtra("Latitude",latitued_seleted);
                 intent.putExtra("Longitude",longituted_selected);
-                intent.putExtra("selected_pace",selected_place_name);
+                intent.putExtra("selected_pace",search_text);
                 intent.putExtra("title",title);
                 intent.putExtra("NoteText",note_text);
+                intent.putExtra("mode",mode);
+                intent.putExtra("id",id);
                 startActivity(intent);
             }
         });
@@ -104,7 +111,12 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         }
     }
     private void init(){
-
+        if(search_text !=null &&!search_text.equals("")){
+            mSearchText.setText(search_text);
+            Double exisisting_lat =Double.parseDouble(latitued_seleted);
+            Double exisisting_long=Double.parseDouble(longituted_selected);
+            moveCamera(new LatLng(exisisting_lat,exisisting_long),DEFAULT_ZOOM);
+        }
         mSearchText.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
@@ -152,7 +164,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             latitued_seleted= Double.toString(address.getLatitude()) ;
             longituted_selected=Double.toString(address.getLongitude());
             google_search_bar=(AutoCompleteTextView) findViewById(R.id.google_search_bar);
-            selected_place_name=google_search_bar.getText().toString();
+            search_text=google_search_bar.getText().toString();
             moveCamera(new LatLng(address.getLatitude(),address.getLongitude()),DEFAULT_ZOOM);
 
         }
@@ -192,7 +204,9 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
         if (mLocationPermissionsGranted) {
-            getDeviceLocation();
+            if(!(search_text !=null &&!search_text.equals(""))) {
+                getDeviceLocation();
+            }
         }
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             return;

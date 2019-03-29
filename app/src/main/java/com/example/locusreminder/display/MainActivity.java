@@ -2,7 +2,10 @@ package com.example.locusreminder.display;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.NavUtils;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.AdapterView;
@@ -41,13 +44,23 @@ public class MainActivity extends AppCompatActivity {
     public void onBackPressed() {
         startActivity(new Intent(this, ViewReminders.class));
     }
+   /* @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            // Respond to the action bar's Up/Home button
+            case android.R.id.home:
+                NavUtils.navigateUpFromSameTask(this);
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }*/
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_note);
+        backNavigation();
         text = (AutoCompleteTextView)findViewById(R.id.textView);
-
         image=findViewById(R.id.image);
         ArrayAdapter adapter = new ArrayAdapter(this,android.R.layout.simple_list_item_1,list1);
         text.setAdapter(adapter);
@@ -78,13 +91,12 @@ public class MainActivity extends AppCompatActivity {
         mode = intent_get_data.getStringExtra("mode");
         if(mode != null) {
             save_button.setText("Update");
-
             text.setText(title);
             textView1.setText(note_text);
             location_text.setText(selected_place);
             btn.setText("Update Location");
         }
-        text.setText(title);
+       text.setText(title);
         setImage(title);
         textView1.setText(note_text);
         location_text.setText(selected_place);
@@ -132,9 +144,22 @@ public class MainActivity extends AppCompatActivity {
                 Intent intent = new Intent(MainActivity.this, MapsActivity.class);
                 intent.putExtra("Title",text.getText().toString());
                 intent.putExtra("NoteText",textView1.getText().toString());
+                intent.putExtra("selected_pace",selected_place);
+                intent.putExtra("Latitude",latitue);
+                intent.putExtra("Longitude",longitude);
+                intent.putExtra("mode",mode);
+                intent.putExtra("id",id);
                 startActivity(intent);
             }
         });
+    }
+
+    private  void backNavigation(){
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.setHomeButtonEnabled(true);
+        actionBar.setDisplayHomeAsUpEnabled(true);
+        actionBar.setHomeAsUpIndicator(R.drawable.ic_arrow_back_black_24dp);
+        actionBar.setDisplayShowHomeEnabled(true);
     }
     //Generate id for each notification
     private String randomNumber(){
