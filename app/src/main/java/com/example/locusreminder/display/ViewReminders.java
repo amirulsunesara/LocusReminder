@@ -45,6 +45,7 @@ public class ViewReminders extends AppCompatActivity
         activity = this;
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+       setTitle(R.string.view_reminders);
 
         fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -95,15 +96,18 @@ public class ViewReminders extends AppCompatActivity
         int id = item.getItemId();
 
          if (id == R.id.btnSettings) {
+             setTitle(R.string.action_settings);
             getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
                     new SettingsFragment()).commit();
         }
         else if (id == R.id.btnHelp) {
+             setTitle(R.string.help);
             getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
                     new HelpFragment()).commit();
 
         }
         else if(id== R.id.btnHome){
+             setTitle(R.string.view_reminders);
             getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
                     new HomeFragment()).commit();
 

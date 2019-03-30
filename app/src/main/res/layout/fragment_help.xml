@@ -3,12 +3,92 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".display.HelpFragment">
-
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+    <LinearLayout
+        android:id="@+id/item_description_layout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:minHeight="48dp"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp"
+        android:background="@color/colorText"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/item_description_title"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.9"
+            android:gravity="center_vertical"
+            android:text="Description1"/>
+
+        <ImageView
+            android:id="@+id/item_description_img"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.1"
+            android:layout_gravity="center_vertical|end"
+            app:srcCompat="@drawable/ic_arrow_drop_down_black_24dp"/>
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/item_description"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp"
+        android:paddingBottom="16dp"
+        android:gravity="center_vertical"
+        android:background="@color/colorText"
+        android:visibility="invisible"
+        android:text="description goes here"/>
+        <LinearLayout
+            android:id="@+id/item_description_layout1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:minHeight="48dp"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
+            android:background="@color/colorText"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/item_description_title1"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.9"
+                android:gravity="center_vertical"
+                android:text="Description2"/>
+
+            <ImageView
+                android:id="@+id/item_description_img1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.1"
+                android:layout_gravity="center_vertical|end"
+                app:srcCompat="@drawable/ic_arrow_drop_down_black_24dp"/>
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/item_description1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
+            android:paddingBottom="16dp"
+            android:gravity="center_vertical"
+            android:background="@color/colorText"
+            android:visibility="invisible"
+            android:text="description goes here"/>
+        </LinearLayout>
 
 </FrameLayout>

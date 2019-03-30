@@ -11,4 +11,8 @@
     <string name="title_activity_view_reminders">LocusReminder</string>
     <string name="title_activity_maps">Map</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="view_reminders">View Reminders</string>
+    <string name="create_reminders">Create Reminders</string>
+    <string name="edit_reminders">Edit Reminders</string>
+    <string name="help">Help</string>
 </resources>

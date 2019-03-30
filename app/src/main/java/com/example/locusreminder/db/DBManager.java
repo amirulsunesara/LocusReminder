@@ -78,7 +78,7 @@ public class DBManager extends SQLiteOpenHelper {
         cv.put("location",location);
         cv.put("longitude",longitude);
         cv.put("latitude",latitude);
-        cv.put("isDeleted","0");
+        cv.put("isDeleted",isDeleted);
 
         SQLiteDatabase db = this.getWritableDatabase();
 
@@ -93,7 +93,7 @@ public class DBManager extends SQLiteOpenHelper {
         List<ReminderData> lstReminderData = new ArrayList<ReminderData>();
         ReminderData rem=null;
         SQLiteDatabase db = this.getWritableDatabase();
-        Cursor res = db.rawQuery("select * from "+DATABASE_NAME,null);
+        Cursor res = db.rawQuery("select * from "+DATABASE_NAME+" where isDeleted = 0",null);
 
         while(res.moveToNext()) {
             String id = res.getString(0);   //0 is the number of id column in your database table

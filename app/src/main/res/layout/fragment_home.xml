@@ -10,19 +10,49 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-    <EditText
-        android:layout_height="wrap_content"
-        android:layout_width="match_parent"
-        android:hint="Search Reminders"
-        android:layout_marginLeft="5dp"
-        android:layout_marginRight="5dp"
-        android:singleLine="true"
-        android:id="@+id/edSearchReminders"
-        android:backgroundTint="@color/colorPrimary"
-        android:textColorHint="@color/black_color"
-        android:textColor="@color/black_color"
-        ></EditText>
+        <android.support.v7.widget.CardView
+            xmlns:card_view="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/search_bar_layout"
+            android:layout_gravity="center"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            card_view:cardCornerRadius="6dp">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
 
+            <ImageView
+                android:id="@+id/ic_search_black_24dp"
+                android:layout_width="15dp"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="8dp"
+                android:adjustViewBounds="false"
+                android:cropToPadding="false"
+                android:src="@drawable/ic_search_manual"
+                android:contentDescription="TODO" />
+            <EditText
+                android:layout_height="match_parent"
+                android:layout_width="match_parent"
+                android:hint="Search Reminders"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:layout_marginTop="8dp"
+                android:layout_alignParentRight="true"
+                android:singleLine="true"
+                android:layout_centerVertical="true"
+                android:id="@+id/edSearchReminders"
+                android:backgroundTint="@color/colorPrimary"
+                android:textColorHint="@color/colorSecondaryText"
+                android:background="@null"
+                android:imeOptions="actionDone"
+                android:textColor="@color/black_color"
+                ></EditText>
+        </LinearLayout>
+        </android.support.v7.widget.CardView>
 
     <ListView
         android:id="@+id/listview_reminders"
@@ -32,7 +62,7 @@
         android:isScrollContainer="true"
         android:scrollbars="vertical"
         android:layout_marginTop="10dp"
-        android:layout_below="@id/edSearchReminders"
+        android:layout_below="@+id/search_bar_layout"
         android:divider="@color/colorDivider"
         />
 

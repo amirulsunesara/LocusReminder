@@ -61,7 +61,6 @@ public class HomeFragment extends Fragment {
                 intent.putExtra("NoteText",reminderData.getNote());
                 intent.putExtra("mode","update");
                 intent.putExtra("id",reminderData.getId());
-
                 startActivity(intent);
 
             }

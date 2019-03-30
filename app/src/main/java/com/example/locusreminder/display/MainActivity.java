@@ -1,10 +1,13 @@
 package com.example.locusreminder.display;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.NavUtils;
 import android.support.v7.app.ActionBar;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
@@ -25,11 +28,9 @@ import com.example.locusreminder.db.ReminderData;
 import java.util.UUID;
 
 public class MainActivity extends AppCompatActivity {
-
-    //EditText textView,textView1;
     EditText textView1;
     TextView location_text;
-    Button save_button,cancel_button;
+    Button save_button,cancel_button,delete_button;
     public  String latitue,longitude,selected_place,title,note_text,id,mode;
     DBManager dbManager;
     ReminderData reminderData;
@@ -44,21 +45,13 @@ public class MainActivity extends AppCompatActivity {
     public void onBackPressed() {
         startActivity(new Intent(this, ViewReminders.class));
     }
-   /* @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            // Respond to the action bar's Up/Home button
-            case android.R.id.home:
-                NavUtils.navigateUpFromSameTask(this);
-                return true;
-        }
-        return super.onOptionsItemSelected(item);
-    }*/
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_note);
+        setTitle(R.string.create_reminders);
+
         backNavigation();
         text = (AutoCompleteTextView)findViewById(R.id.textView);
         image=findViewById(R.id.image);
@@ -72,15 +65,13 @@ public class MainActivity extends AppCompatActivity {
                 String list = (String) parent.getItemAtPosition(position);
                 setImage(list);
             }
-
-
         });
-
         textView1=(EditText)findViewById(R.id.textView1);
         Button btn = findViewById(R.id.AddLocationButton);
         location_text=(TextView)findViewById(R.id.location_text);
         save_button = (Button)findViewById(R.id.save_button);
         cancel_button=(Button)findViewById(R.id.cancel_button);
+        delete_button=(Button)findViewById(R.id.delete_button);
         Intent intent_get_data = getIntent();
         latitue = intent_get_data.getStringExtra("Latitude");
         longitude = intent_get_data.getStringExtra("Longitude");
@@ -90,17 +81,41 @@ public class MainActivity extends AppCompatActivity {
         id = intent_get_data.getStringExtra("id");
         mode = intent_get_data.getStringExtra("mode");
         if(mode != null) {
+            delete_button.setVisibility(View.VISIBLE);
             save_button.setText("Update");
             text.setText(title);
             textView1.setText(note_text);
             location_text.setText(selected_place);
             btn.setText("Update Location");
+            setTitle(R.string.edit_reminders);
+
         }
        text.setText(title);
         setImage(title);
         textView1.setText(note_text);
         location_text.setText(selected_place);
         dbManager = new DBManager(this);
+        DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                switch (which){
+                    case DialogInterface.BUTTON_POSITIVE:
+                        dialog.dismiss();
+                        Intent intent = new Intent(MainActivity.this,ViewReminders.class);
+                        dbManager.updateReminderData(id,text.getText().toString(), textView1.getText().toString(), location_text.getText().toString(), longitude, latitue, "1");
+                        startActivity(intent);
+                        break;
+
+                    case DialogInterface.BUTTON_NEGATIVE:
+                        dialog.dismiss();
+                        break;
+                }
+            }
+        };
+
+        final AlertDialog.Builder  builder = new AlertDialog.Builder(this);
+        builder.setTitle("Confirm");
+        builder.setMessage("Are you sure to delete reminder?").setPositiveButton("Yes", dialogClickListener).setNegativeButton("No", dialogClickListener);
         //Toast notification for field validation
         save_button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -137,7 +152,6 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-
         btn.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
@@ -152,6 +166,13 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+        delete_button.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                builder.show();
+
+            }
+        });
     }
 
     private  void backNavigation(){
@@ -160,6 +181,12 @@ public class MainActivity extends AppCompatActivity {
         actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setHomeAsUpIndicator(R.drawable.ic_arrow_back_black_24dp);
         actionBar.setDisplayShowHomeEnabled(true);
+
+    }
+    public boolean onOptionsItemSelected(MenuItem item){
+        Intent myIntent = new Intent(getApplicationContext(), ViewReminders.class);
+        startActivityForResult(myIntent, 0);
+        return true;
     }
     //Generate id for each notification
     private String randomNumber(){
