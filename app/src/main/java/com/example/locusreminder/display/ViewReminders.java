@@ -11,7 +11,11 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.pm.PackageManager;
 import android.location.Location;
+import android.media.RingtoneManager;
+import android.net.Uri;
 import android.os.Build;
+import android.os.VibrationEffect;
+import android.os.Vibrator;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
@@ -33,6 +37,7 @@ import com.example.locusreminder.R;
 import com.example.locusreminder.adapter.ReminderAdapter;
 import com.example.locusreminder.db.DBManager;
 import com.example.locusreminder.db.ReminderData;
+import com.example.locusreminder.model.GlobApplication;
 import com.example.locusreminder.model.ReminderModel;
 import com.example.locusreminder.service.LocationService;
 
@@ -44,9 +49,11 @@ public class ViewReminders extends AppCompatActivity
 
     private Activity activity;
     FloatingActionButton fab;
+
     DBManager dbManager;
     private BroadcastReceiver broadcastReceiver;
 
+   // private List<ReminderData> lstDispatchedReminder;
     public FloatingActionButton getFloatingActionButton() {
         return fab;
     }
@@ -58,7 +65,8 @@ public class ViewReminders extends AppCompatActivity
         activity = this;
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-       setTitle(R.string.view_reminders);
+        setTitle(R.string.view_reminders);
+     //   lstDispatchedReminder = new ArrayList<ReminderData>();
         dbManager = new DBManager(this);
         fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -190,9 +198,17 @@ public class ViewReminders extends AppCompatActivity
             notificationManager.createNotificationChannel(channel);
 
         }
+        //trigger tone
+        Uri alarmSound = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
+        builder.setSound(alarmSound);
+
 
         NotificationManagerCompat notificationManager = NotificationManagerCompat.from(this);
         notificationManager.notify(id, builder.build());
+
+
+        //vibrate phone
+        VibratePhone();
 
     }
 
@@ -221,9 +237,10 @@ public class ViewReminders extends AppCompatActivity
 
                             float distance = location1.distanceTo(location2);
 
-                            if(distance <= 100)
+                            if(distance <= 100 && !isNotifationDispatched(rd))
                             {
                                 createNotification(i,rd);
+                                dispatchNotification(rd);
                             }
 
                         }
@@ -237,6 +254,35 @@ public class ViewReminders extends AppCompatActivity
             };
         }
         registerReceiver(broadcastReceiver,new IntentFilter("locationCoordinates"));
+    }
+    public boolean isNotifationDispatched(ReminderData rd)
+    {
+
+        List<ReminderData> reminders = ((GlobApplication) this.getApplication()).getLstDispatchedReminder();
+        boolean isDispatched = false;
+        for (ReminderData r:reminders) {
+            if(r.getId().equals(rd.getId()))
+            {
+                isDispatched = true;
+            }
+        }
+        return  isDispatched;
+
+    }
+    public void dispatchNotification(ReminderData rd)
+    {
+
+        ((GlobApplication)this.getApplication()).setLstDispatchedReminder(rd);
+
+    }
+    public void VibratePhone(){
+
+        Vibrator vibrator = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
+       if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+           vibrator.vibrate(VibrationEffect.createOneShot(1000, VibrationEffect.DEFAULT_AMPLITUDE));
+        } else {
+           vibrator.vibrate(1000);
+        }
     }
 
     @Override

@@ -30,7 +30,8 @@ import java.util.UUID;
 public class MainActivity extends AppCompatActivity {
     EditText textView1;
     TextView location_text;
-    Button save_button,cancel_button,delete_button;
+    Button save_button,cancel_button;//,delete_button;
+    AlertDialog.Builder  builder;
     public  String latitue,longitude,selected_place,title,note_text,id,mode;
     DBManager dbManager;
     ReminderData reminderData;
@@ -71,7 +72,7 @@ public class MainActivity extends AppCompatActivity {
         location_text=(TextView)findViewById(R.id.location_text);
         save_button = (Button)findViewById(R.id.save_button);
         cancel_button=(Button)findViewById(R.id.cancel_button);
-        delete_button=(Button)findViewById(R.id.delete_button);
+        //delete_button=(Button)findViewById(R.id.delete_button);
         Intent intent_get_data = getIntent();
         latitue = intent_get_data.getStringExtra("Latitude");
         longitude = intent_get_data.getStringExtra("Longitude");
@@ -81,7 +82,7 @@ public class MainActivity extends AppCompatActivity {
         id = intent_get_data.getStringExtra("id");
         mode = intent_get_data.getStringExtra("mode");
         if(mode != null) {
-            delete_button.setVisibility(View.VISIBLE);
+            //delete_button.setVisibility(View.VISIBLE);
             save_button.setText("Update");
             text.setText(title);
             textView1.setText(note_text);
@@ -90,6 +91,8 @@ public class MainActivity extends AppCompatActivity {
             setTitle(R.string.edit_reminders);
 
         }
+
+
        text.setText(title);
         setImage(title);
         textView1.setText(note_text);
@@ -113,7 +116,7 @@ public class MainActivity extends AppCompatActivity {
             }
         };
 
-        final AlertDialog.Builder  builder = new AlertDialog.Builder(this);
+        builder = new AlertDialog.Builder(this);
         builder.setTitle("Confirm");
         builder.setMessage("Are you sure to delete reminder?").setPositiveButton("Yes", dialogClickListener).setNegativeButton("No", dialogClickListener);
         //Toast notification for field validation
@@ -166,13 +169,13 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-        delete_button.setOnClickListener(new View.OnClickListener(){
+      /*  delete_button.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
                 builder.show();
 
             }
-        });
+        });*/
     }
 
     private  void backNavigation(){
@@ -183,10 +186,31 @@ public class MainActivity extends AppCompatActivity {
         actionBar.setDisplayShowHomeEnabled(true);
 
     }
-    public boolean onOptionsItemSelected(MenuItem item){
-        Intent myIntent = new Intent(getApplicationContext(), ViewReminders.class);
-        startActivityForResult(myIntent, 0);
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        Intent intent_get_data = getIntent();
+        mode = intent_get_data.getStringExtra("mode");
+        if(mode != null) {
+            getMenuInflater().inflate(R.menu.menu_main, menu);
+        }
         return true;
+    }
+
+
+    public boolean onOptionsItemSelected(MenuItem item){
+
+        int id = item.getItemId();
+
+        if (id == R.id.btnDelete) {
+
+            builder.show();
+            return super.onOptionsItemSelected(item);
+        }
+        else {
+            Intent myIntent = new Intent(getApplicationContext(), ViewReminders.class);
+            startActivityForResult(myIntent, 0);
+            return true;
+        }
     }
     //Generate id for each notification
     private String randomNumber(){
