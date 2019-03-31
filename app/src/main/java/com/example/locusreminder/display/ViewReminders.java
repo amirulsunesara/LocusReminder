@@ -9,6 +9,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.media.RingtoneManager;
@@ -17,6 +18,7 @@ import android.os.Build;
 import android.os.VibrationEffect;
 import android.os.Vibrator;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
@@ -66,7 +68,9 @@ public class ViewReminders extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         setTitle(R.string.view_reminders);
+
      //   lstDispatchedReminder = new ArrayList<ReminderData>();
+        PreferenceManager.setDefaultValues(this, R.xml.preferences, false);
         dbManager = new DBManager(this);
         fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -145,8 +149,10 @@ public class ViewReminders extends AppCompatActivity
 
          if (id == R.id.btnSettings) {
              setTitle(R.string.action_settings);
-            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                    new SettingsFragment()).commit();
+             getSupportFragmentManager()
+                     .beginTransaction()
+                     .replace(R.id.fragment_container, new SettingsFragment())
+                     .commit();
         }
         else if (id == R.id.btnHelp) {
              setTitle(R.string.help);
@@ -198,9 +204,17 @@ public class ViewReminders extends AppCompatActivity
             notificationManager.createNotificationChannel(channel);
 
         }
+
+        SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
+        boolean notificationVibrate = sharedPref.getBoolean("notificationVibrate", true);
+        boolean notificationSound = sharedPref.getBoolean("notificationSound",true);
+
+
         //trigger tone
-        Uri alarmSound = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
-        builder.setSound(alarmSound);
+        if(notificationSound) {
+            Uri alarmSound = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
+            builder.setSound(alarmSound);
+        }
 
 
         NotificationManagerCompat notificationManager = NotificationManagerCompat.from(this);
@@ -208,9 +222,11 @@ public class ViewReminders extends AppCompatActivity
 
 
         //vibrate phone
+        if(notificationVibrate)
         VibratePhone();
 
     }
+
 
     @Override
     protected void onResume() {
@@ -237,7 +253,9 @@ public class ViewReminders extends AppCompatActivity
 
                             float distance = location1.distanceTo(location2);
 
-                            if(distance <= 100 && !isNotifationDispatched(rd))
+                            SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+                            String range = sharedPref.getString("lstRange","100");
+                            if(distance <= Integer.parseInt(range) && !isNotifationDispatched(rd))
                             {
                                 createNotification(i,rd);
                                 dispatchNotification(rd);

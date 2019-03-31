@@ -58,7 +58,7 @@ public class LocationService extends Service {
         locManager = (LocationManager) getApplicationContext().getSystemService(Context.LOCATION_SERVICE);
 
 
-        locManager.requestLocationUpdates(LocationManager.GPS_PROVIDER,6000,0, locListener);
+        locManager.requestLocationUpdates(LocationManager.GPS_PROVIDER,3000,0, locListener);
 
     }
 

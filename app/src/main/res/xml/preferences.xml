@@ -1,14 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
-<PreferenceScreen
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+<PreferenceScreen xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+>
 
-    <SwitchPreferenceCompat
-        app:key="notifications"
-        app:title="Enable message notifications"/>
+    <CheckBoxPreference
+        app:key="notificationSound"
+        app:title="Notification Sound"
+        android:defaultValue="true"
+        />
 
-    <Preference
-        app:key="feedback"
-        app:title="Send feedback"
-        app:summary="Report technical issues or suggest new features"/>
+    <CheckBoxPreference
+        android:defaultValue="true"
+        app:key="notificationVibrate"
+        app:title="Vibrate on Notification"
+        />
+
+
+    <ListPreference
+        android:defaultValue="100"
+        android:dialogTitle="Select radius from a location"
+        android:entries="@array/arrDistance"
+        android:entryValues="@array/arrDistance"
+        android:key="lstRange"
+        android:summary="Set the distance from a location to receive a notification in specified radius"
+        android:title="GPS Notification Range" />
 
 </PreferenceScreen>
