@@ -18,7 +18,7 @@
 
     <ListPreference
         android:defaultValue="100"
-        android:dialogTitle="Select radius from a location"
+        android:dialogTitle="Select radius from a location (meters)"
         android:entries="@array/arrDistance"
         android:entryValues="@array/arrDistance"
         android:key="lstRange"

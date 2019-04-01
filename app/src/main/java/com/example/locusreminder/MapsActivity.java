@@ -85,6 +85,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 intent.putExtra("NoteText",note_text);
                 intent.putExtra("mode",mode);
                 intent.putExtra("id",id);
+
                 startActivity(intent);
             }
         });
