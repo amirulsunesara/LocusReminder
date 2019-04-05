@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorDivider"
+    >
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/colorDivider"
+    tools:context=".display.MainActivity">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/image"
+            android:layout_margin="5dp"
+            android:padding="5dp"
+            android:src="@drawable/ic_new_releases_black_24dp"
+            android:background="@drawable/edittext_border"
+            android:scaleType="centerCrop"
+            android:layout_gravity="center"
+            android:layout_width="75dp"
+            android:layout_height="75dp" />
+        <android.support.v7.widget.CardView
+            xmlns:card_view="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/note_tile_card_view"
+            android:layout_gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="75dp"
+            card_view:cardCornerRadius="4dp">
+        <AutoCompleteTextView
+            android:id="@+id/textView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:hint ="Enter title"
+            android:padding="10dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:singleLine="true"
+            android:background="@null"
+            android:textColorHint="@color/colorSecondaryText"
+            android:textColor="@color/colorPrimaryText"
+            />
+        </android.support.v7.widget.CardView>
+
+    </LinearLayout>
+    <android.support.v7.widget.CardView
+        xmlns:card_view="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/note_text_card_view"
+        android:layout_width="match_parent"
+        android:layout_height="800px"
+        card_view:cardCornerRadius="4dp">
+
+        <EditText
+            android:id="@+id/textView1"
+            android:layout_width="match_parent"
+            android:layout_marginTop="20px"
+            android:layout_height="1200px"
+            android:hint ="Enter note"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:textColorHint="@color/colorSecondaryText"
+            android:textColor="@color/colorPrimaryText"
+            android:gravity="top"
+            android:background="@null"
+            android:lines="10"
+            />
+    </android.support.v7.widget.CardView>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50px"
+        android:orientation="horizontal">
+        <Button
+            android:id="@+id/AddLocationButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/black_color"
+            android:text="Add Location" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/black_color"
+            android:id="@+id/location_text"/>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        android:layout_marginTop="50px"
+        >
+        <Button
+            android:id="@+id/save_button"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight=".50"
+            android:textColor="@color/black_color"
+            android:text="Save" />
+        <Button
+            android:id="@+id/cancel_button"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight=".50"
+            android:textColor="@color/black_color"
+            android:text="Cancel"
+            />
+    </LinearLayout>
+<!--    <Button
+        android:id="@+id/delete_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight=".50"
+        android:textColor="@color/black_color"
+        android:visibility="invisible"
+        android:text="Delete"
+        />-->
+</LinearLayout>
+</ScrollView>

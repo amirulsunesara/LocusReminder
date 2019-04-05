@@ -1,0 +1,216 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".display.HelpFragment">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <LinearLayout
+            android:id="@+id/item_description_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:minHeight="48dp"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
+            android:background="@color/colorText"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/item_description_title"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.9"
+                android:gravity="center_vertical"
+                android:text="@string/faq1"/>
+
+            <ImageView
+                android:id="@+id/item_description_img"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.1"
+                android:layout_gravity="center_vertical|end"
+                app:srcCompat="@drawable/ic_arrow_drop_down_black_24dp"/>
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/item_description"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
+            android:paddingBottom="16dp"
+            android:gravity="center_vertical"
+            android:background="@color/colorText"
+            android:visibility="invisible"
+            android:text="@string/faq1_answer"
+            />
+        <LinearLayout
+            android:id="@+id/item_description_layout1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:minHeight="48dp"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
+            android:background="@color/colorText"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/item_description_title1"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.9"
+                android:gravity="center_vertical"
+                android:text="@string/faq2"/>
+
+            <ImageView
+                android:id="@+id/item_description_img1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.1"
+                android:layout_gravity="center_vertical|end"
+                app:srcCompat="@drawable/ic_arrow_drop_down_black_24dp"/>
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/item_description1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
+            android:paddingBottom="16dp"
+            android:gravity="center_vertical"
+            android:background="@color/colorText"
+            android:visibility="invisible"
+            android:text="@string/faq2_answer"/>
+        <LinearLayout
+            android:id="@+id/item_description_layout3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:minHeight="48dp"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
+            android:background="@color/colorText"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/item_description_title3"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.9"
+                android:gravity="center_vertical"
+                android:text="@string/faq3"/>
+
+            <ImageView
+                android:id="@+id/item_description_img3"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.1"
+                android:layout_gravity="center_vertical|end"
+                app:srcCompat="@drawable/ic_arrow_drop_down_black_24dp"/>
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/item_description3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
+            android:paddingBottom="16dp"
+            android:gravity="center_vertical"
+            android:background="@color/colorText"
+            android:visibility="invisible"
+            android:text="@string/faq3_answer"/>
+
+        <LinearLayout
+            android:id="@+id/item_description_layout4"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:minHeight="48dp"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
+            android:background="@color/colorText"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/item_description_title4"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.9"
+                android:gravity="center_vertical"
+                android:text="@string/faq4"/>
+
+            <ImageView
+                android:id="@+id/item_description_img4"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.1"
+                android:layout_gravity="center_vertical|end"
+                app:srcCompat="@drawable/ic_arrow_drop_down_black_24dp"/>
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/item_description4"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
+            android:paddingBottom="16dp"
+            android:gravity="center_vertical"
+            android:background="@color/colorText"
+            android:visibility="invisible"
+            android:text="@string/faq4_answers"/>
+        <LinearLayout
+            android:id="@+id/item_description_layout5"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:minHeight="48dp"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
+            android:background="@color/colorText"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/item_description_title5"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.9"
+                android:gravity="center_vertical"
+                android:text="@string/faq5"/>
+
+            <ImageView
+                android:id="@+id/item_description_img5"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.1"
+                android:layout_gravity="center_vertical|end"
+                app:srcCompat="@drawable/ic_arrow_drop_down_black_24dp"/>
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/item_description5"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
+            android:paddingBottom="16dp"
+            android:gravity="center_vertical"
+            android:background="@color/colorText"
+            android:visibility="invisible"
+            android:text="@string/faq5_answer"/>
+    </LinearLayout>
+
+</FrameLayout>
