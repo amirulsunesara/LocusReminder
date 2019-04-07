@@ -129,6 +129,7 @@ public class HelpFragment extends Fragment {
             }
         });
 
+        //floating icon for help section to add notes
         FloatingActionButton floatingActionButton = ((ViewReminders) getActivity()).getFloatingActionButton();
         floatingActionButton.hide();
 
