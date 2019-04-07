@@ -50,13 +50,11 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private FusedLocationProviderClient mFusedLocationProviderClient;
     private static final float DEFAULT_ZOOM = 15F;
     private AutoCompleteTextView mSearchText;
-    private PlaceAutocompleteAdapter mPlaceAutocompleteAdapter;
-    private GoogleApiClient mGoogleApiClient;
     private static final LatLngBounds LAT_LNG_BOUNDS = new LatLngBounds( new LatLng(-40,-168),new LatLng(71,136));
     Button maps_done_button;
     private String latitued_seleted="";
     private String longituted_selected="";
-    private  String selected_place_name="";
+
     private String title,note_text,search_text="",mode,id;
     private AutoCompleteTextView google_search_bar;
 
