@@ -20,9 +20,11 @@ public class HelpFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        //initialization for the help section
         View view = inflater.inflate(R.layout.fragment_help, container, false);
         final TextView mItemDescription = (TextView) view.findViewById(R.id.item_description);
         final ImageView mDescriptionImg=(ImageView) view.findViewById(R.id.item_description_img);
+        final LinearLayout layout_one5=(LinearLayout)view.findViewById(R.id.item_description_layout5);
         final LinearLayout layout_one=(LinearLayout)view.findViewById(R.id.item_description_layout);
         final TextView mItemDescription1 = (TextView) view.findViewById(R.id.item_description1);
         final ImageView mDescriptionImg1=(ImageView) view.findViewById(R.id.item_description_img1);
@@ -35,7 +37,7 @@ public class HelpFragment extends Fragment {
         final LinearLayout layout_one4=(LinearLayout)view.findViewById(R.id.item_description_layout4);
         final TextView mItemDescription5 = (TextView) view.findViewById(R.id.item_description5);
         final ImageView mDescriptionImg5=(ImageView) view.findViewById(R.id.item_description_img5);
-        final LinearLayout layout_one5=(LinearLayout)view.findViewById(R.id.item_description_layout5);
+
         layout_one.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
