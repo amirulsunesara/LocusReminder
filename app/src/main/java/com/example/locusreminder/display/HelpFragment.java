@@ -37,16 +37,16 @@ public class HelpFragment extends Fragment {
         final LinearLayout layout_one4=(LinearLayout)view.findViewById(R.id.item_description_layout4);
         final TextView mItemDescription5 = (TextView) view.findViewById(R.id.item_description5);
         final ImageView mDescriptionImg5=(ImageView) view.findViewById(R.id.item_description_img5);
-
+        //on click for question1
         layout_one.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (mItemDescription.getVisibility() == View.INVISIBLE) {
-                    // it's collapsed - expand it
+                    // it's collapsed  expand it
                     mItemDescription.setVisibility(View.VISIBLE);
                     mDescriptionImg.setImageResource(R.drawable.ic_arrow_drop_up_black_24dp);
                 } else {
-                    // it's expanded - collapse it
+                    // it's expanded  collapse it
                     mItemDescription.setVisibility(View.INVISIBLE);
                     mDescriptionImg.setImageResource(R.drawable.ic_arrow_drop_down_black_24dp);
                 }
