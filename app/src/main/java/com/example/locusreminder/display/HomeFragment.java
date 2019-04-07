@@ -48,7 +48,7 @@ public class HomeFragment extends Fragment {
 
         reminderAdapter =new ReminderAdapter(getActivity(),lstReminder);
         reminderList.setAdapter(reminderAdapter);
-
+        //adding to values to pass to other intent
         reminderList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
