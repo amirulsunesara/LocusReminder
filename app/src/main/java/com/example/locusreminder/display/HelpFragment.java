@@ -114,11 +114,11 @@ public class HelpFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 if (mItemDescription5.getVisibility() == View.INVISIBLE) {
-                    // it's collapsed - expand it
+                    // help section 4 question should be visible if it is invisible
                     mItemDescription5.setVisibility(View.VISIBLE);
                     mDescriptionImg5.setImageResource(R.drawable.ic_arrow_drop_up_black_24dp);
                 } else {
-                    // it's expanded - collapse it
+                    // help section 4 question should be invisible if it is visible
                     mItemDescription5.setVisibility(View.INVISIBLE);
                     mDescriptionImg5.setImageResource(R.drawable.ic_arrow_drop_down_black_24dp);
                 }
