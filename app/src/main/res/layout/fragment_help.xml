@@ -5,6 +5,7 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".display.HelpFragment">
+    <!-- fragment for help section-->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -130,7 +131,7 @@
             android:background="@color/colorText"
             android:visibility="invisible"
             android:text="@string/faq3_answer"/>
-
+<!--linear layout for help question3-->
         <LinearLayout
             android:id="@+id/item_description_layout4"
             android:layout_width="match_parent"
