@@ -129,31 +129,13 @@ public class PlaceAutocompleteAdapter
         };
     }
 
-    /**
-     * Submits an autocomplete query to the Places Geo Data Autocomplete API.
-     * Results are returned as frozen AutocompletePrediction objects, ready to be cached.
-     * Returns an empty list if no results were found.
-     * Returns null if the API client is not available or the query did not complete
-     * successfully.
-     * This method MUST be called off the main UI thread, as it will block until data is returned
-     * from the API, which may include a network request.
-     *
-     * @param constraint Autocomplete query string
-     * @return Results from the autocomplete API or null if the query was not successful.
-     * @see GeoDataClient#getAutocompletePredictions(String, LatLngBounds, AutocompleteFilter)
-     * @see AutocompletePrediction#freeze()
-     */
+
     private ArrayList<AutocompletePrediction> getAutocomplete(CharSequence constraint) {
 
-
-        // Submit the query to the autocomplete API and retrieve a PendingResult that will
-        // contain the results when the query completes.
         Task<AutocompletePredictionBufferResponse> results =
                 mGeoDataClient.getAutocompletePredictions(constraint.toString(), mBounds,
                         mPlaceFilter);
 
-        // This method should have been called off the main UI thread. Block and wait for at most
-        // 60s for a result from the API.
         try {
             Tasks.await(results, 60, TimeUnit.SECONDS);
         } catch (ExecutionException | InterruptedException | TimeoutException e) {
