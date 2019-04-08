@@ -61,15 +61,17 @@ public class PlaceAutocompleteAdapter
     }
 
     @Override
+    public AutocompletePrediction getItem(int position) {
+        return mResultList.get(position);
+    }
+
+    @Override
     public int getCount() {
         return mResultList.size();
     }
 
 
-    @Override
-    public AutocompletePrediction getItem(int position) {
-        return mResultList.get(position);
-    }
+
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
