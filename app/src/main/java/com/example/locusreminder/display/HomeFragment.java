@@ -66,6 +66,7 @@ public class HomeFragment extends Fragment {
             }
         });
         /*Search function added*/
+        /*a list is built*/
 
         search.addTextChangedListener(new TextWatcher() {
 
