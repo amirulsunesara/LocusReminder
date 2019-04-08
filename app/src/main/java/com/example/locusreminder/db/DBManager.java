@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-
+/*database modified for Search function*/
 public class DBManager extends SQLiteOpenHelper {
 
     public static final String DATABASE_NAME = "Reminder";
