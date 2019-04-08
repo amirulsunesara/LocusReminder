@@ -172,6 +172,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private  void backNavigation(){
+        //code for back nsvigstion
         ActionBar actionBar = getSupportActionBar();
         actionBar.setHomeButtonEnabled(true);
         actionBar.setDisplayHomeAsUpEnabled(true);
