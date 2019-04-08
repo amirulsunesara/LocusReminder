@@ -172,6 +172,7 @@ public class ViewReminders extends AppCompatActivity
         return true;
     }
 
+    //create a new notification
     public void createNotification(int id,ReminderData reminderData)
     {
         Intent intent = new Intent(this, MainActivity.class);
