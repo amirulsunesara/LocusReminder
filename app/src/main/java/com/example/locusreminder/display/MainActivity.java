@@ -205,15 +205,16 @@ public class MainActivity extends AppCompatActivity {
             return true;
         }
     }
+
+    //code to hide key board
+    private void hideSoftkeyboard(){
+        this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
+    }
     //Generate id for each notification
     private String randomNumber(){
         UUID unqId = UUID.randomUUID();
         String strUnqId = unqId.toString();
         return strUnqId;
-    }
-    //code to hide key board
-    private void hideSoftkeyboard(){
-        this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
     }
     //Code to set image for title
     public void setImage(String list){
