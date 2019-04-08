@@ -3,9 +3,9 @@ package com.example.locusreminder.db;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-
+//database changed
 public class ReminderData implements Parcelable {
-    String title,note,id,location;
+    String title,note,id,location,newlocation;
     String longitude,latitude;
     String IsDeleted;
 
