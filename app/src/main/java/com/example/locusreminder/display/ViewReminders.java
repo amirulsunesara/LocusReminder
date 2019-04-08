@@ -108,7 +108,7 @@ public class ViewReminders extends AppCompatActivity
                 new HomeFragment()).commit();
 
     }
-
+    // necessary permission to access maps
     private boolean reqPermission() {
         if(Build.VERSION.SDK_INT >= 23 && ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED){
 
