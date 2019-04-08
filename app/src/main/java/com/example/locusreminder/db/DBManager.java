@@ -22,7 +22,7 @@ public class DBManager extends SQLiteOpenHelper {
     public DBManager(Context context) {
         super(context, DATABASE_NAME, null, 1);
     }
-
+//create databse at first time
     @Override
     public void onCreate(SQLiteDatabase db) {
 
