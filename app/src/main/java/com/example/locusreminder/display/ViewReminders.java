@@ -69,7 +69,7 @@ public class ViewReminders extends AppCompatActivity
         setSupportActionBar(toolbar);
         setTitle(R.string.view_reminders);
 
-     //   lstDispatchedReminder = new ArrayList<ReminderData>();
+        //   lstDispatchedReminder = new ArrayList<ReminderData>();
         PreferenceManager.setDefaultValues(this, R.xml.preferences, false);
         dbManager = new DBManager(this);
         fab = (FloatingActionButton) findViewById(R.id.fab);
@@ -142,27 +142,27 @@ public class ViewReminders extends AppCompatActivity
         }
     }
 
-  //navigation on settings and help and documentation
+    //navigation on settings and help and documentation
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-         if (id == R.id.btnSettings) {
-             setTitle(R.string.action_settings);
-             getSupportFragmentManager()
-                     .beginTransaction()
-                     .replace(R.id.fragment_container, new SettingsFragment())
-                     .commit();
+        if (id == R.id.btnSettings) {
+            setTitle(R.string.action_settings);
+            getSupportFragmentManager()
+                    .beginTransaction()
+                    .replace(R.id.fragment_container, new SettingsFragment())
+                    .commit();
         }
         else if (id == R.id.btnHelp) {
-             setTitle(R.string.help);
+            setTitle(R.string.help);
             getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
                     new HelpFragment()).commit();
 
         }
         else if(id== R.id.btnHome){
-             setTitle(R.string.view_reminders);
+            setTitle(R.string.view_reminders);
             getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
                     new HomeFragment()).commit();
 
@@ -225,7 +225,7 @@ public class ViewReminders extends AppCompatActivity
 
         //vibrate phone
         if(notificationVibrate)
-        VibratePhone();
+            VibratePhone();
 
     }
 
