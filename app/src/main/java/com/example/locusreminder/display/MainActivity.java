@@ -169,13 +169,6 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-      /*  delete_button.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View v) {
-                builder.show();
-
-            }
-        });*/
     }
 
     private  void backNavigation(){
