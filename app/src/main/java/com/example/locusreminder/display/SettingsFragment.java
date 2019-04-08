@@ -16,7 +16,7 @@ public class SettingsFragment extends PreferenceFragmentCompat {
 
     @Override
     public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
-
+        // floating action button for settings fragment
         FloatingActionButton floatingActionButton = ((ViewReminders) getActivity()).getFloatingActionButton();
         floatingActionButton.hide();
         setPreferencesFromResource(R.xml.preferences, rootKey);
