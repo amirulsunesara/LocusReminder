@@ -42,7 +42,7 @@ public class DBManager extends SQLiteOpenHelper {
 
 
 
-
+//insert data function
     public boolean insertReminderData(String id, String title, String note, String location, String longitude,String latitude,String isDeleted) {
 
         String sql = "INSERT INTO " + DATABASE_NAME + " (id,title,note,location,longitude,latitude,isDeleted) VALUES(?,?,?,?,?,?,?)";
