@@ -55,7 +55,7 @@ public class ViewReminders extends AppCompatActivity
     DBManager dbManager;
     private BroadcastReceiver broadcastReceiver;
 
-   // private List<ReminderData> lstDispatchedReminder;
+
     public FloatingActionButton getFloatingActionButton() {
         return fab;
     }
@@ -287,21 +287,22 @@ public class ViewReminders extends AppCompatActivity
         return  isDispatched;
 
     }
+    public void VibratePhone(){
+
+        Vibrator vibrator = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            vibrator.vibrate(VibrationEffect.createOneShot(1000, VibrationEffect.DEFAULT_AMPLITUDE));
+        } else {
+            vibrator.vibrate(1000);
+        }
+    }
     public void dispatchNotification(ReminderData rd)
     {
 
         ((GlobApplication)this.getApplication()).setLstDispatchedReminder(rd);
 
     }
-    public void VibratePhone(){
 
-        Vibrator vibrator = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
-       if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-           vibrator.vibrate(VibrationEffect.createOneShot(1000, VibrationEffect.DEFAULT_AMPLITUDE));
-        } else {
-           vibrator.vibrate(1000);
-        }
-    }
 
     @Override
     protected void onDestroy() {
