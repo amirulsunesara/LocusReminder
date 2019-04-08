@@ -29,6 +29,8 @@ public class LocationService extends Service {
     public void onCreate() {
 
         locListener = new LocationListener() {
+
+            //if user location changed the it will send broadcast
             @Override
             public void onLocationChanged(Location location) {
                 Intent intent = new Intent("locationCoordinates");
