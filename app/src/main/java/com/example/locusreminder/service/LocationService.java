@@ -45,16 +45,18 @@ public class LocationService extends Service {
             }
 
             @Override
-            public void onProviderEnabled(String s) {
-
-            }
-
-            @Override
             public void onProviderDisabled(String s) {
                 Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(intent);
             }
+
+            @Override
+            public void onProviderEnabled(String s) {
+
+            }
+
+
         };
 
         locManager = (LocationManager) getApplicationContext().getSystemService(Context.LOCATION_SERVICE);
@@ -66,6 +68,7 @@ public class LocationService extends Service {
 
     @Override
     public void onDestroy() {
+        //dispose the location manager
         super.onDestroy();
         if(locManager != null){
 
