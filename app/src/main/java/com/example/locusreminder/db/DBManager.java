@@ -87,7 +87,7 @@ public class DBManager extends SQLiteOpenHelper {
 
     }
 
-
+//collect data from the list
     public List<ReminderData> getReminderData() {
 
         List<ReminderData> lstReminderData = new ArrayList<ReminderData>();
