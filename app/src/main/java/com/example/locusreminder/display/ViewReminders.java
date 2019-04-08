@@ -273,6 +273,7 @@ public class ViewReminders extends AppCompatActivity
         }
         registerReceiver(broadcastReceiver,new IntentFilter("locationCoordinates"));
     }
+    //to check notification is displayed
     public boolean isNotifationDispatched(ReminderData rd)
     {
 
