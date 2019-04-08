@@ -110,7 +110,7 @@ public class DBManager extends SQLiteOpenHelper {
         return lstReminderData;
     }
 
-
+//data deletion added
     public void deleteDatabase()
     {
         SQLiteDatabase db = this.getWritableDatabase();
