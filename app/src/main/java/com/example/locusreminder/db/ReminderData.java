@@ -28,7 +28,7 @@ public class ReminderData implements Parcelable {
     public String getLocation() {
         return location;
     }
-
+//Setdata added
     public void setLocation(String location) {
         this.location = location;
     }
