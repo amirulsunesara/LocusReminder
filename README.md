@@ -1,122 +1,83 @@
-Identification:
-===============
+# Project Summary:
 
 **Project Title**: LocusReminder
 
-**Group Members:**
+An android application based on reminder system. Users set the reminder to perform tasks by typing a reminder note and selecting a location. “Locus Reminder” automatically notifies when the user is nearby to the location, with a trigger notification and display title message pre-entered in reminder notes.
+
+# Contributors:
 
 Ambadipudi Akhil Teja
 
->   B00825307 \| 902-452-7965 \| ak974116\@dal.ca
+> B00825307 \| 902-452-7965 \| ak974116\@dal.ca
 
 Shuo Yang
 
->   B00606093 \| 902-233-5680 \| sh805190\@dal.ca
+> B00606093 \| 902-233-5680 \| sh805190\@dal.ca
 
 Jayanthi Ajith
 
-B00825322 \| 902-448-7956 \| aj788769\@dal.ca
+> B00825322 \| 902-448-7956 \| aj788769\@dal.ca
 
 Amirul Sunesara
 
->   B00813456 \| 902-401-3097 \| amirul.sunesara\@dal.ca
+> B00813456 \| 902-401-3097 \| amirul.sunesara\@dal.ca
 
 Lakshmi Narayana Peniketi
 
->   B00819840 \| 902-399-8905 \| lk720991\@dal.ca
+> B00819840 \| 902-399-8905 \| lk720991\@dal.ca
 
-Project Summary:
-================
-
-Context-aware reminder applications must be significant throughout a person's
-daily life. Mobile phones provide a convenient and truly ubiquitous platform for
-the detection of personal contexts such as location and reminders. Mobile Phones
-were introduced to increase the accessibility of phone for users at different
-locations. Smartphones were developed to expand the services based on location.
-Mobile phones enhanced user connections around the globe and lessen users
-memorizing skills. So, the aim is to develop a reminder system based on locus
-posted by the user with a friendly interface and experience. Users set the
-Reminder to perform a task by making a note and selecting a location. “Locus
-Reminder” automatically notifies when the user is nearby to the locus with a
-trigger notification and display title message pre-entered in notes.
-
-Git Repository Details:
-=======================
-
-Latest codebase can be found in master branch.
-
-**Clone with HTTPS:**
-https://git.cs.dal.ca/syang/project_for_mobile_computing.git
-
-**Clone with SSH:** git\@git.cs.dal.ca:syang/project_for_mobile_computing.git
-
-Libraries 
-==========
-
-**com.android.support:preference-v7:23.0.1: **This library provides support for
-adding preferences to an application. It is used for storing key-value data, and
-generally used for storing data on settings screen. 
-
-**com.google.android.gms:play-services:11.8.0:** This library provides support
-for Google maps and also provides access to various features.
-
-Installation Notes: 
-====================
+# Installation Notes: 
 
 Checkout master branch and after checkout you will find app-debug.apk on root
 directory. Copy this file on phone and install.
 
-Code Examples: 
-===============
+# Code Examples: 
 
 **Problem 1: We needed a function to calculate distance from current location to
-a specific location inserted with reminders** 
+a specific location inserted with reminders**
 
 Here we are using distanceTo( ) function of Location class which is making
 conversion more simpler where we don’t need to consider unit conversion, as this
-function provides default conversion in meters.   
+function provides default conversion in meters.
 
 // Following method is implementing logic for distance calculation and
 notifications   
-if(rd.getIsDeleted().equals("0")){ 
+if(rd.getIsDeleted().equals("0")){
 
-           Location location2 = new Location(""); 
+Location location2 = new Location("");
 
-           location2.setLatitude(Double.parseDouble(rd.getLatitude())); 
+location2.setLatitude(Double.parseDouble(rd.getLatitude()));
 
-           location2.setLongitude(Double.parseDouble(rd.getLongitude())); 
+location2.setLongitude(Double.parseDouble(rd.getLongitude()));
 
-     float distance = location1.distanceTo(location2); 
+float distance = location1.distanceTo(location2);
 
-     SharedPreferences sharedPref = PreferenceManager.getDefaultSharedP references(getApplicationContext()); 
+SharedPreferences sharedPref = PreferenceManager.getDefaultSharedP references(getApplicationContext());
 
-           String range = sharedPref.getString("lstRange","100"); 
+String range = sharedPref.getString("lstRange","100");
 
-if(distance \<= Integer.parseInt(range) && !isNotifationDispatched(rd)){ 
+if(distance \<= Integer.parseInt(range) && !isNotifationDispatched(rd)){
 
-    createNotification(i,rd); 
+createNotification(i,rd);
 
-    dispatchNotification(rd);   }} 
+dispatchNotification(rd);   }}
 
-// Source: Android Developers [6] 
+// Source: Android Developers [6]
 
 **Problem 2: We need a logic for saving default of settings screen when
-application is instantiated first time** 
+application is instantiated first time**
 
 During the search we found that a function can be used to set default values for
 settings screen. Therefore, we don’t need to write explicit logic to save
-default values.  
+default values.
 
-// Following line of code solve this problem 
+// Following line of code solve this problem
 
-PreferenceManager.setDefaultValues(this, R.xml.preferences, false); 
+PreferenceManager.setDefaultValues(this, R.xml.preferences, false);
 
-// Source: Program Creek [7] 
+// Source: Program Creek [7]
 
-Feature Section:
-================
-
-Main Features:
+# Feature Section:
 
 **Database:**
 
@@ -149,19 +110,17 @@ service to users whenever the service is starting. The vibration will be bound
 with the clear alert. The notification and vibration have been added to the
 system.
 
-Device features used:
----------------------
+## Device features used:
 
--   GPS
+- GPS
 
--   Wi-Fi
+- Wi-Fi
 
--   Cellular Data
+- Cellular Data
 
--   IN-BUILT Haptic Audio Feedback
+- IN-BUILT Haptic Audio Feedback
 
-Final Project Status:
-=====================
+# Final Project Status:
 
 The minimum and the expected functionalities are completed. As of now
 application is ready to use with the expected functionality.
@@ -175,28 +134,27 @@ the user reaches the specified location.
 **Bonus Functionality:** Notes can even be created by integrating features such
 as speech to text recognition.
 
-Sources 
-========
+# Sources 
 
 1.  Settings  \|  Android Developers. (n.d.). Retrieved
-    from https://developer.android.com/guide/topics/ui/settings 
+    from https://developer.android.com/guide/topics/ui/settings
 
 2.  Vujovic, F. (2016, June 17). Android - Get GPS location via service.
-    Retrieved from https://www.youtube.com/watch?v=lvcGh2ZgHeA 
+    Retrieved from https://www.youtube.com/watch?v=lvcGh2ZgHeA
 
 3.  Fragments  \|  Android Developers. (n.d.). Retrieved
-    from https://developer.android.com/guide/components/fragments 
+    from https://developer.android.com/guide/components/fragments
 
 4.  Menus  \|  Android Developers. (n.d.). Retrieved
-    from https://developer.android.com/guide/topics/ui/menus 
+    from https://developer.android.com/guide/topics/ui/menus
 
 5.  Tutorials, J. A. (2016, June 20). Android Studio How to use scroll view
-    (ScrollView). Retrieved from https://www.youtube.com/watch?v=_IF1vJF7Xb8 
+    (ScrollView). Retrieved from https://www.youtube.com/watch?v=_IF1vJF7Xb8
 
 6.  Location \| Android Developers. (n.d.). Retrieved
-    from https://developer.android.com/reference/android/location/Location 
+    from https://developer.android.com/reference/android/location/Location
 
 7.  Java Code Examples
     for android.support.v7.preference.PreferenceManager.setDefaultValues().
     (n.d.). Retrieved
-    from https://www.programcreek.com/java-api-examples/?class=android.support.v7.preference.PreferenceManager&method=setDefaultValues 
+    from https://www.programcreek.com/java-api-examples/?class=android.support.v7.preference.PreferenceManager&method=setDefaultValues
